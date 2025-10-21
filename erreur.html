@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erreur de connexion - Clanwar Chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center; 
+            padding: 50px; 
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+        
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #cccccc;
+        }
+        
+        .suggestions {
+            text-align: left;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border-left: 3px solid #4ecdc4;
+        }
+        
+        .suggestions h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #4ecdc4;
+        }
+        
+        .suggestions ul {
+            list-style-position: inside;
+            color: #cccccc;
+        }
+        
+        .suggestions li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+        
+        button { 
+            padding: 12px 30px; 
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a3a0 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+            margin: 5px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .button-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+        }
+        
+        .button-secondary:hover {
+            box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+        }
+        
+        .buttons {
+            margin-top: 20px;
+        }
+        
+        .status {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">⚠️</div>
+        <h1>Impossible de se connecter à Clanwar Chat</h1>
+        <p>L'application n'a pas pu charger le site web. Cela peut être dû à un problème de connexion internet ou à une indisponibilité temporaire du serveur.</p>
+        
+        <div class="suggestions">
+            <h2>Que faire ?</h2>
+            <ul>
+                <li>Vérifiez votre connexion internet</li>
+                <li>Vérifiez que le site <strong>clanwar.fr</strong> est accessible depuis votre navigateur</li>
+                <li>Attendez quelques instants et réessayez</li>
+                <li>Si le problème persiste, contactez le support</li>
+            </ul>
+        </div>
+        
+        <div class="buttons">
+            <button onclick="location.reload()">🔄 Réessayer</button>
+            <button class="button-secondary" onclick="window.close()">✖ Fermer</button>
+        </div>
+        
+        <div class="status" id="status"></div>
+    </div>
+    
+    <script>
+        // Affiche l'heure de l'erreur
+        document.getElementById('status').textContent = 'Erreur survenue à ' + new Date().toLocaleTimeString('fr-FR');
+        
+        // Tentative de reconnexion automatique après 10 secondes
+        let countdown = 10;
+        const statusElement = document.getElementById('status');
+        
+        const interval = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+                statusElement.textContent = `Nouvelle tentative automatique dans ${countdown} seconde${countdown > 1 ? 's' : ''}...`;
+            } else {
+                clearInterval(interval);
+                location.reload();
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
+

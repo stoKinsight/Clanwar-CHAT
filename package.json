@@ -1,0 +1,89 @@
+{
+  "name": "clanwar-chat",
+  "version": "2.1.0",
+  "description": "Application de chat Clanwar.fr avec badges dynamiques, sécurité renforcée et notifications natives",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "cross-env NODE_ENV=development electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "lint": "eslint main.js",
+    "lint:fix": "eslint main.js --fix",
+    "audit": "npm audit",
+    "audit:fix": "npm audit fix"
+  },
+  "author": "stoK",
+  "license": "MIT",
+  "homepage": "https://clanwar.fr",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stoK/Clanwar-CHAT.git"
+  },
+  "keywords": [
+    "chat",
+    "clanwar",
+    "electron",
+    "desktop",
+    "notifications"
+  ],
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3",
+    "eslint": "^8.57.0"
+  },
+  "dependencies": {
+    "electron-log": "^5.1.2",
+    "electron-updater": "^6.1.8",
+    "electron-window-state": "^5.0.3"
+  },
+  "build": {
+    "appId": "fr.clanwar.chat",
+    "productName": "Clanwar Chat",
+    "artifactName": "Clanwar-Chat-${version}-${os}-${arch}.${ext}",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "badges/icon-badge-0.png",
+      "category": "public.app-category.social-networking"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "badges/icon-badge-0.png",
+      "category": "Network"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "allowElevation": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Clanwar Chat"
+    },
+    "files": [
+      "main.js",
+      "icon.ico",
+      "badges/**/*",
+      "erreur.html",
+      "package.json"
+    ]
+  }
+}
