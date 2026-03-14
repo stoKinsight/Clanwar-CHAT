@@ -1,7 +1,7 @@
 {
   "name": "clanwar-chat",
-  "version": "2.1.0",
-  "description": "Application de chat Clanwar.fr avec badges dynamiques, sécurité renforcée et notifications natives",
+  "version": "2.2.0",
+  "description": "Application de chat Clanwar.fr avec badges de notification et nettoyage automatique",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -23,11 +23,7 @@
     "url": "https://github.com/stoK/Clanwar-CHAT.git"
   },
   "keywords": [
-    "chat",
-    "clanwar",
-    "electron",
-    "desktop",
-    "notifications"
+    "chat", "clanwar", "electron", "desktop", "notifications"
   ],
   "devDependencies": {
     "cross-env": "^7.0.3",
@@ -43,31 +39,16 @@
   "build": {
     "appId": "fr.clanwar.chat",
     "productName": "Clanwar Chat",
+    "copyright": "Copyright © 2026 stoK",
     "artifactName": "Clanwar-Chat-${version}-${os}-${arch}.${ext}",
     "win": {
       "target": [
         {
           "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
+          "arch": ["x64", "ia32"]
         }
       ],
       "icon": "icon.ico"
-    },
-    "mac": {
-      "target": "dmg",
-      "icon": "badges/icon-badge-0.png",
-      "category": "public.app-category.social-networking"
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "icon": "badges/icon-badge-0.png",
-      "category": "Network"
     },
     "nsis": {
       "oneClick": false,
@@ -76,14 +57,26 @@
       "allowElevation": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Clanwar Chat"
+      "shortcutName": "Clanwar Chat",
+      "uninstallDisplayName": "Clanwar Chat",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true,
+      "include": "installer.nsh"
     },
     "files": [
       "main.js",
+      "preload.js",
       "icon.ico",
-      "badges/**/*",
       "erreur.html",
-      "package.json"
+      "package.json",
+      "badges/**/*"
+    ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "stoK",
+        "repo": "Clanwar-CHAT"
+      }
     ]
   }
 }
